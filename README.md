@@ -44,6 +44,7 @@ You will need a google service account (free) with Google Sheets API enabled and
  - Path to your google api credentials
  - Input your email address and smtp password
  - Edit your userlist to include all of the people participating
+ - Make sure to rename the config.example.ini to config.ini
 
  ### Run setup.py
  - This will create two critical files, contacts.csv and url.csv
