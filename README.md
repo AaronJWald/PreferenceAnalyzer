@@ -29,3 +29,31 @@ You will need a google service account (free) with Google Sheets API enabled and
  - How their scores compare to the group.
  - Their most loved and hated whiskeys.
  - A ranked list of all whiskeys tasted.
+
+## Installation and configuration
+ ### Clone this repository
+ ```
+ git clone https://github.com/AaronJWald/PreferenceAnalyzer.git
+ cd whiskey-weekend
+ ```
+ ### Install Dependencies
+ ```
+ pip install -r requirements.txt
+ ```
+ ### Configure config.ini
+ - Path to your google api credentials
+ - Input your email address and smtp password
+ - Edit your userlist to include all of the people participating
+
+ ### Run setup.py
+ - This will create two critical files, contacts.csv and url.csv
+  - In contacts.csv, add the email addresses for each user that you would like to email.
+ - There is currently a built-in delay to stay within Google's Free Tier rate limits. Anticipated runtime is about 30 seconds per person.
+ - After the setup is complete and you have entered the email addresses into contacts.csv, uncomment the email_users function at the bottom and run the script again to share each file with the respective user.
+
+ ### Go through all of the things you are rating
+
+ ### Run Whiskey_Sheet_Aggregation
+ 
+ ### If you did a blind test, go to setup.py and re-comment out email_users and uncomment the reveal() function, and run the script again to reveal items.
+

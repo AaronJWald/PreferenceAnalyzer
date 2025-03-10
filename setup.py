@@ -115,6 +115,23 @@ def mainsetup():
             New_Whiskey_locations = pd.concat([New_Whiskey_locations, new_row], ignore_index=True)
             
         New_Whiskey_locations.to_csv(file_path)
+def reveal():
+    existing_sheet = pd.read_csv(file_path)
+    existing_user = existing_sheet['User'].to_list()
+    #existing_sheet = existing_sheet.loc[existing_sheet['User'] == 'Aaron']
+
+    for x,y in zip(existing_sheet['User'], existing_sheet['URL']):
+        spreadsheet = client.open_by_url(y)
+        worksheet = spreadsheet.sheet1
+        print(worksheet)
+        local_sheet = bottles_key.copy()
+        
+        for z in range(len(letters)):
+            key = letters[z]
+            bottle = bottles_key.get(key)
+            worksheet.update_cell((z+2), 1, bottle)
+            time.sleep(0.2)
+        time.sleep(60)
 
 def email_users():
     people = pd.read_csv(file_path)
@@ -153,4 +170,5 @@ pass
 #running mainsetup() should create the files for you to modify.
 mainsetup()
 #email_users()
+#reveal()
 #additional_bottles()
