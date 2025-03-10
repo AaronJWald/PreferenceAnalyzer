@@ -6,7 +6,26 @@ This project utilizes google sheets to allow users to give a score from 0 to 100
 You will need a google service account (free) with Google Sheets API enabled and an SMTP account to be able to email the results to each participant.
 
 ## Features:
-### Automated Google Sheets Integration
+ ### Automated Google Sheets Integration
  - Creates a dedicated Google Sheet for each participant.
  - Automatically populates each sheet with whiskey identifiers (either names or blind labels).
  - Assigns a randomized score for testing and prevents API rate limits.
+
+ ### Centralized Data Aggregation
+ - Fetches and compiles all participant ratings into a master dataset.
+ - Ensures scores are properly formatted (0-100 range).
+ - Supports blind testing mode, replacing labels with letters. The correct labels can be pushed from the primary function later.
+
+ ### Personalized and Group Insights
+ - Ranking System: Orders whiskeys from best to worst based on average ratings.
+ - Personalized Reports: Each participant receives their own customized breakdown via email.
+ - Most/Least Polarizing Whiskeys: Identifies controversial bottles based on rating variance.
+ - Cost Efficiency Analysis: Highlights whiskeys that provide the best value for their price.
+ - Personalized Taste Match: Identifies which individuals you agree and disagree with the most.
+ - Biggest Discrepency: Highlights the individual ratings with the highest distance from the group consensus.
+
+ ### Email Reports
+ - Their personal rating trends.
+ - How their scores compare to the group.
+ - Their most loved and hated whiskeys.
+ - A ranked list of all whiskeys tasted.
