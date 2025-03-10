@@ -9,16 +9,23 @@ import os
 from whiskey_bottles import bottles_with_keys
 from whiskey_bottles import price_dict
 import Email_Python
+import configparser
+
+# Replace with the path to your JSON credentials file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Path to the config.ini file
+config_path = os.path.join(current_dir, 'config.ini')
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-creds = 'Path_to_your_google_api_cred_file_here'
-folder_path = "path_to_where_you_want_to_save_data"
-data = pd.read_csv('C:/Path/To/Whiskey_urls.csv')
-contacts =  pd.read_csv('Path_to_contact_file_here.csv')
+creds_path = config['GoogleAPI']['creds']
+data = pd.read_csv('Whiskey_urls.csv')
+contacts =  pd.read_csv('contacts.csv')
 # Path to the file
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name(creds, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
 client = gspread.authorize(creds)
 
 df = pd.DataFrame()
@@ -196,10 +203,12 @@ def efficency():
     statement = f"For those who are looking for the best bang for their buck, here is the list ordered by cost efficiency (average score divided by cost):\n\n{''.join([x + ', ' for x in efficient['Combined'].iloc[:-1]])}and least efficient, {efficient['Combined'].iloc[-1]}."
     return statement
 
+users = config['Users']['user_list']
+all_users = [item.strip() for item in users.split(',')]
 
 users = ['Aaron']
-for x in users:
-    contact = contacts['email'].loc[contacts['User'] == x].item()
+for x in all_users:
+    contact = contacts['Email'].loc[contacts['User'] == x].item()
     subject = f"{x}'s Whiskey Weekend Results"
     total_statement = best_bottles()[0] + best_bottles()[1] + best_rater()[0] + best_rater()[1] + harshest_critic() +  polarizing()[0] + polarizing()[1] + discussion()[0] + discussion()[1] + "Let's dive into your preferences specifcally\n\n" + favorite_and_least(x)[0] + favorite_and_least(x)[1] + taste_profile(x) + preference(x)[0] + preference(x)[1] + best_bottles(user = x)[0] + best_bottles(user = x)[1] + efficency()
     print(total_statement)

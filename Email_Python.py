@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import smtplib
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
@@ -7,13 +8,22 @@ from email.mime.application import MIMEApplication
 from email.mime.image import MIMEImage
 from email import encoders
 from os.path import basename
+import configparser
+
+# Replace with the path to your JSON credentials file
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Path to the config.ini file
+config_path = os.path.join(current_dir, 'config.ini')
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 
 #This import list is a bit heavier duty than you need for this program. Much of this functionality is
 #used in my other projects.
 def send_email(subject, body, to_email, filename = None):
     # Your email and password (use an app password if using Gmail)
-    email_address = 'YourEmailHere@email.com'
-    email_password = 'your smtp pass here'
+    email_address = config['Data']['default_email']
+    email_password = config['Data']['email_pass']
 
     # Set up the MIME
     message = MIMEMultipart()
