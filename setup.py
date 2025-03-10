@@ -4,7 +4,7 @@ import datetime as dt
 import pandas as pd
 import random as rd
 import os
-from whiskey_bottles import bottles_key
+from whiskey_bottles import bottles_with_keys
 from whiskey_bottles import letters
 import time
 import configparser
@@ -124,11 +124,11 @@ def reveal():
         spreadsheet = client.open_by_url(y)
         worksheet = spreadsheet.sheet1
         print(worksheet)
-        local_sheet = bottles_key.copy()
+        local_sheet = bottles_with_keys.copy()
         
         for z in range(len(letters)):
             key = letters[z]
-            bottle = bottles_key.get(key)
+            bottle = bottles_with_keys.get(key)
             worksheet.update_cell((z+2), 1, bottle)
             time.sleep(0.2)
         time.sleep(60)
