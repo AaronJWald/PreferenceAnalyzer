@@ -16,7 +16,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(current_dir, 'config.ini')
 config = configparser.ConfigParser()
 config.read('config.ini')
-
+email_address = config['Data']['default_email']
 
 #This import list is a bit heavier duty than you need for this program. Much of this functionality is
 #used in my other projects.
@@ -57,6 +57,6 @@ def send_email(subject, body, to_email, filename = None):
 if __name__ == "__main__":
     subject = 'Your automated email!'
     body = 'Well Done!'
-    to_email = 'YourEmailHere@email.com'
+    to_email = email_address
 
     send_email(subject, body, to_email)
