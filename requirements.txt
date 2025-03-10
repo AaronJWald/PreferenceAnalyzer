@@ -1,0 +1,9 @@
+gspread
+oauth2client
+pandas
+numpy
+configparser
+datetime
+random
+os
+time
